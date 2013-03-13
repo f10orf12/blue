@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>What's In Blue</title>
+    <link rel="stylesheet" href="_resources/css/jquery.mobile.custom.structure.css" />
+    <link rel="stylesheet" href="_resources/css/styles.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+    <div data-role="page" id="page5">
+        <script>
+            $(document).on('pageshow', '[data-role=page]', function () {
+                function getQueryParam(param) {
+                    var result = window.location.search.match(new RegExp("(\\?|&)" + param + "(\\[\\])?=([^&]*)"));
+                    return result ? result[3] : false;
+                }
+                var paramId = getQueryParam("ID");
+                var paramFeed = getQueryParam("Feed");
+
+                //var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_africa.xml';
+
+                if (paramFeed === "Home") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/homepage.xml';
+                }
+                if (paramFeed === "Africa") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_africa.xml';
+                }
+                if (paramFeed === "Americas") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_americas.xml';
+                }
+                if (paramFeed === "Arms") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_arms_control_disarmament.xml';
+                }
+                if (paramFeed === "Asia") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_asia.xml';
+                }
+                if (paramFeed === "Children") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_children_armed_conflict.xml';
+                }
+                if (paramFeed === "CounterTerrorism") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_counter_terrorism.xml';
+                }
+                if (paramFeed === "Europe") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_europe.xml';
+                }
+                if (paramFeed === "Justice") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_justice_criminal_accountability.xml';
+                }
+                if (paramFeed === "MidEast") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_middle_east.xml';
+                }
+                if (paramFeed === "PeaceBuilding") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_peacebuilding.xml';
+                }
+                if (paramFeed === "PeaceKeeping") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_peacekeeping.xml';
+                }
+                if (paramFeed === "PeaceMaking") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_peacemaking.xml';
+                }
+                if (paramFeed === "Civilians") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_protection_civilians.xml';
+                }
+                if (paramFeed === "Issues") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_un_institutional_issues.xml';
+                }
+                if (paramFeed === "Women") {
+                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_women_peace_security.xml';
+                }
+
+                (function (url, callback) {
+                    jQuery.ajax({
+                        url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(url),
+                        dataType: 'json',
+                        success: function (data) {
+                            callback(data.responseData.feed);
+                        }
+                    });
+                })(myUrl, function (feed) { // Change to desired URL
+                    var entries = feed.entries, feedList = '';
+                    var i = 4;
+                    feedList += '<div class="date">' + entries[paramId].publishedDate + '</div><div class="story_title">' + entries[paramId].title + '</div><div id="' + paramId + '" class="content">' + entries[paramId].content + '</div></div>';
+                    $('.date').remove();
+                    $('.story_title').remove();
+                    $('.content').remove();
+                    jQuery('#story > div').append(feedList);
+
+                });
+            });
+        </script>
+        <header><a href="index.html" data-rel="back"><img src="_resources/img/header_interior.gif" class="header" border="0" /></a></header>
+        <div id="story">
+            <div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
