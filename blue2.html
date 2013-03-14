@@ -6,7 +6,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title>What's In Blue</title>
-    <link href="_resources/css/jquery.mobile.custom.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="_resources/css/jquery.mobile.custom.structure.css" />
     <link rel="stylesheet" href="_resources/css/styles.css" />
     <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
@@ -34,7 +33,7 @@
                 var entries = feed.entries;
                 if (mainList === '') {
                     for (var i = 0; i < entries.length; i++) {
-                        mainList += '<div data-role="button" class="main_link" id="feed' + i + '"><a href="#content"  data-article =' + i + ' data-feed="Home" data-transition="slidefade" id="' + i + '">' + entries[i].title + '</a></div>';
+                        mainList += '<div class="main_link" id="feed' + i + '"><a href="#content" data-role="button" data-article =' + i + ' data-feed="Home" data-transition="slidefade" id="' + i + '">' + entries[i].title + '</a></div>';
                     }
                     jQuery('#feedMain > ul').append(mainList);
                 } //end if
