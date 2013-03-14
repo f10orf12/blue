@@ -35,6 +35,7 @@
                     for (var i = 0; i < entries.length; i++) {
                         mainList += '<div class="main_link" id="feed' + i + '"><a href="#content" data-role="button" data-article =' + i + ' data-feed="Home" data-transition="slidefade" id="' + i + '">' + entries[i].title + '</a></div>';
                     }
+
                     jQuery('#feedMain > ul').append(mainList);
                 } //end if
             });
@@ -43,7 +44,15 @@
                 g_ID = $(e.target).jqmData("article");
                 g_Feed = $(e.target).jqmData("feed");
             });
+
         });
+    //Categories
+        $('#categories').live('pageshow', '[data-role=page]', function () {
+            $('div').click(function (e) {
+                alert($(e.target).jqmData("feed"))
+            });
+        });
+
     //Articles
         $('#articles').live('pageshow', '[data-role=page]', function () {
             var paramFeed = g_Feed;
@@ -133,6 +142,9 @@
                     g_Feed = $(e.target).jqmData("feed");
                 });
 
+                $('.btn-ui-text').click(function (e) {
+                    $(e.target).append(" clicked");
+                });
             });
         });
     //Content
@@ -231,8 +243,8 @@
             <a href="#articles" data-feed="Africa" data-role="button" data-transition="slidefade">
                 Africa</a>
         </div>
-        <div class="category_link">
-            <a href="#articles" data-feed="Americas" data-role="button" data-transition="slidefade">
+        <div class="category_link" data-feed="Americas">
+            <a href="#articles" data-feed="Americas" data-role="button" data-transition="slidefade" text="">
                 Americas</a>
         </div>
         <div class="category_link">
