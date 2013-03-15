@@ -18,28 +18,31 @@
             $.mobile.allowCrossDomainPages = true;
         });
     </script>
-    <script type="text/javascript">
-        $(document).on('pageshow', '[data-role=page]', function () {
-            $('.main_link').remove();
-            var i = 0;
-            $.ajax({
-                url: 'http://www.whatsinblue.org/_mobile_app/homepage.xml',
-                dataType: 'xml',
-                success: function (myxml) {
-                    $(myxml).find('item').each(function () {
-                        i += 1;
-                        $(this).find("title").each(function () {
-                            var title = '<div class="main_link" id="feed' + i + '"><a href="content.html?ID=' + i + '&Feed=Home" data-role="button"  id="' + i + '">' + $(this).text() + '</a></div>';
-                            $('#feedMain > ul').append(title);
-                        });
-                    });
-                }
-            });
-        });
-        </script>
 </head>
 <body>
     <div data-role="page" id="page2">
+        <script type="text/javascript">
+            n = 1;
+            $('#page2').live('pageshow', '[data-role=page]', function () {
+                for (n; n < 2; n++) {
+                    $('.main_link').remove();
+                    var i = 0;
+                    $.ajax({
+                        url: 'http://www.whatsinblue.org/_mobile_app/homepage.xml',
+                        dataType: 'xml',
+                        success: function (myxml) {
+                            $(myxml).find('item').each(function () {
+                                i += 1;
+                                $(this).find("title").each(function () {
+                                    var title = '<div class="main_link" id="feed' + i + '"><a href="content.html?ID=' + i + '&Feed=Home" data-role="button"  id="' + i + '">' + $(this).text() + '</a></div>';
+                                    $('#feedMain > ul').append(title);
+                                });
+                            });
+                        }
+                    });
+                }
+            });
+        </script>
         <header>
             <ul class="header_list">
                 <li class="icon_back"><a href="index.html" data-rel="back"><img src="icon_back_sm.gif" /></a></li>

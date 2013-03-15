@@ -22,89 +22,93 @@
 <body>
     <div data-role="page" id="page5">
         <script type="text/javascript">
-            $(document).on('pageshow', '[data-role=page]', function () {
-                $('.story_title').remove();
-                $('.date').remove();
-                $('.content').remove();
-                function getQueryParam(param) {
-                    var result = window.location.search.match(new RegExp("(\\?|&)" + param + "(\\[\\])?=([^&]*)"));
-                    return result ? result[3] : false;
-                }
-                var paramId = getQueryParam("ID");
-                var paramFeed = getQueryParam("Feed");
-                if (paramFeed === "Home") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/homepage.xml';
-                }
-                if (paramFeed === "Africa") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_africa.xml';
-                }
-                if (paramFeed === "Americas") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_americas.xml';
-                }
-                if (paramFeed === "Arms") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_arms_control_disarmament.xml';
-                }
-                if (paramFeed === "Asia") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_asia.xml';
-                }
-                if (paramFeed === "Children") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_children_armed_conflict.xml';
-                }
-                if (paramFeed === "CounterTerrorism") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_counter_terrorism.xml';
-                }
-                if (paramFeed === "Europe") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_europe.xml';
-                }
-                if (paramFeed === "Justice") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_justice_criminal_accountability.xml';
-                }
-                if (paramFeed === "MidEast") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_middle_east.xml';
-                }
-                if (paramFeed === "PeaceBuilding") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_peacebuilding.xml';
-                }
-                if (paramFeed === "PeaceKeeping") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_peacekeeping.xml';
-                }
-                if (paramFeed === "PeaceMaking") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_peacemaking.xml';
-                }
-                if (paramFeed === "Civilians") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_protection_civilians.xml';
-                }
-                if (paramFeed === "Issues") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_un_institutional_issues.xml';
-                }
-                if (paramFeed === "Women") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_women_peace_security.xml';
-                }
-                var i = 0;
-                $.ajax({
-                    url: myUrl,
-                    dataType: 'xml',
-                    success: function (contentXml) {
-                        $(contentXml).find('item').each(function () {
-                            i += 1;
-                            if (i == paramId) {
-                                $(this).find("title").each(function () {
-                                    var title = '<div class="story_title" id="title' + i + '">' + $(this).text() + '</div>';
-                                    $('#story').append(title);
-                                });
-                                $(this).find("pubDate").each(function () {
-                                    var date = '<div class="date" id="date' + i + '">' + $(this).text() + '</div>';
-                                    $('#story').append(date);
-                                });
-                                $(this).find("description").each(function () {
-                                    var content = '<div class="content" id="content' + i + '">' + $(this).text() + '</div>';
-                                    $('#story').append(content);
-                                });
-                            }
-                        });
+            n = 0;
+            $('#page5').live('pageshow', '[data-role=page]', function () {
+                for (n; n < 2; n++) {
+                    function getQueryParam(param) {
+                        var result = window.location.search.match(new RegExp("(\\?|&)" + param + "(\\[\\])?=([^&]*)"));
+                        return result ? result[3] : false;
                     }
-                });
+                    var paramId = getQueryParam("ID");
+                    var paramFeed = getQueryParam("Feed");
+                    if (paramFeed === "Home") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/homepage.xml';
+                    }
+                    if (paramFeed === "Africa") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_africa.xml';
+                    }
+                    if (paramFeed === "Americas") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_americas.xml';
+                    }
+                    if (paramFeed === "Arms") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_arms_control_disarmament.xml';
+                    }
+                    if (paramFeed === "Asia") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_asia.xml';
+                    }
+                    if (paramFeed === "Children") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_children_armed_conflict.xml';
+                    }
+                    if (paramFeed === "CounterTerrorism") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_counter_terrorism.xml';
+                    }
+                    if (paramFeed === "Europe") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_europe.xml';
+                    }
+                    if (paramFeed === "Justice") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_justice_criminal_accountability.xml';
+                    }
+                    if (paramFeed === "MidEast") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_middle_east.xml';
+                    }
+                    if (paramFeed === "PeaceBuilding") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_peacebuilding.xml';
+                    }
+                    if (paramFeed === "PeaceKeeping") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_peacekeeping.xml';
+                    }
+                    if (paramFeed === "PeaceMaking") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_peacemaking.xml';
+                    }
+                    if (paramFeed === "Civilians") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_protection_civilians.xml';
+                    }
+                    if (paramFeed === "Issues") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_un_institutional_issues.xml';
+                    }
+                    if (paramFeed === "Women") {
+                        var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_women_peace_security.xml';
+                    }
+                    var i = 0;
+                    $.ajax({
+                        url: myUrl,
+                        dataType: 'xml',
+                        success: function (contentXml) {
+                            $(contentXml).find('item').each(function () {
+                                i += 1;
+                                if (i == paramId) {
+                                    $(this).find("title").each(function () {
+                                        var title = '<div class="story_title" id="title' + i + '">' + $(this).text() + '</div>';
+                                        $('#story').append(title);
+                                        // alert(title);
+                                    });
+                                    $(this).find("pubDate").each(function () {
+                                        var pubDate = '<div class="date" id="date' + i + '">' + $(this).text() + '</div>';
+                                        $('#story').append(pubDate);
+                                        // alert(pubDate);
+                                    });
+                                    $(this).find("description").each(function () {
+                                        var content = '<div class="content" id="content' + i + '">' + $(this).text() + '</div>';
+                                        $('#story').append(content);
+                                        // alert(content);
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
             });
+            
         </script>
         <header>
             <ul class="header_list">
@@ -114,6 +118,10 @@
             </ul>
         </header>
         <div id="story">
+        </div>
+        <div id="story_date">
+        </div>
+        <div id="story_content">
         </div>
     </div>
 </body>
