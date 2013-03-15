@@ -6,23 +6,32 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title>What's In Blue</title>
-    <link rel="stylesheet" href="_resources/css/jquery.mobile.custom.structure.css" />
-    <link rel="stylesheet" href="_resources/css/styles.css" />
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" href="jquery.mobile.custom.structure.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="text/javascript" src="phonegap.js"></script>
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="jquery.mobile-1.3.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).on("mobileinit", function () {
+            // Make your jQuery Mobile framework configuration changes here!
+            $.support.cors = true;
+            $.mobile.allowCrossDomainPages = true;
+        });
+    </script>
 </head>
 <body>
     <div data-role="page" id="page5">
-        <script>
+        <script type="text/javascript">
             $(document).on('pageshow', '[data-role=page]', function () {
+                $('.story_title').remove();
+                $('.date').remove();
+                $('.content').remove();
                 function getQueryParam(param) {
                     var result = window.location.search.match(new RegExp("(\\?|&)" + param + "(\\[\\])?=([^&]*)"));
                     return result ? result[3] : false;
                 }
                 var paramId = getQueryParam("ID");
                 var paramFeed = getQueryParam("Feed");
-
-                //var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_africa.xml';
-
                 if (paramFeed === "Home") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/homepage.xml';
                 }
@@ -71,31 +80,40 @@
                 if (paramFeed === "Women") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_women_peace_security.xml';
                 }
-
-                (function (url, callback) {
-                    jQuery.ajax({
-                        url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(url),
-                        dataType: 'json',
-                        success: function (data) {
-                            callback(data.responseData.feed);
-                        }
-                    });
-                })(myUrl, function (feed) { // Change to desired URL
-                    var entries = feed.entries, feedList = '';
-                    var i = 4;
-                    feedList += '<div class="date">' + entries[paramId].publishedDate + '</div><div class="story_title">' + entries[paramId].title + '</div><div id="' + paramId + '" class="content">' + entries[paramId].content + '</div></div>';
-                    $('.date').remove();
-                    $('.story_title').remove();
-                    $('.content').remove();
-                    jQuery('#story > div').append(feedList);
-
+                var i = 0;
+                $.ajax({
+                    url: myUrl,
+                    dataType: 'xml',
+                    success: function (contentXml) {
+                        $(contentXml).find('item').each(function () {
+                            i += 1;
+                            if (i == paramId) {
+                                $(this).find("title").each(function () {
+                                    var title = '<div class="story_title" id="title' + i + '">' + $(this).text() + '</div>';
+                                    $('#story').append(title);
+                                });
+                                $(this).find("pubDate").each(function () {
+                                    var date = '<div class="date" id="date' + i + '">' + $(this).text() + '</div>';
+                                    $('#story').append(date);
+                                });
+                                $(this).find("description").each(function () {
+                                    var content = '<div class="content" id="content' + i + '">' + $(this).text() + '</div>';
+                                    $('#story').append(content);
+                                });
+                            }
+                        });
+                    }
                 });
             });
         </script>
-        <header><a href="index.html" data-rel="back"><img src="_resources/img/header_interior.gif" class="header" border="0" /></a></header>
+        <header>
+            <ul class="header_list">
+                <li class="icon_back"><a href="index.html" data-rel="back"><img src="icon_back_sm.gif" /></a></li>
+                <li class="wib_logo"><img src="wib_logo_sm.gif" /></li>
+                <!-- <li class="icon_email"><img src="icon_email_sm.gif" /></li> -->
+            </ul>
+        </header>
         <div id="story">
-            <div>
-            </div>
         </div>
     </div>
 </body>

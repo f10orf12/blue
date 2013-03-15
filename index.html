@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,16 +6,56 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title>What's In Blue</title>
-    <link rel="stylesheet" href="_resources/css/jquery.mobile.custom.structure.css" />
-    <link rel="stylesheet" href="_resources/css/styles.css" />
-    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+    <link rel="stylesheet" href="jquery.mobile.custom.structure.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="text/javascript" src="phonegap.js"></script>
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="jquery.mobile-1.3.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).on("mobileinit", function () {
+            // Make your jQuery Mobile framework configuration changes here!
+            $.support.cors = true;
+            $.mobile.allowCrossDomainPages = true;
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).on('pageshow', '[data-role=page]', function () {
+            $('.main_link').remove();
+            var i = 0;
+            $.ajax({
+                url: 'http://www.whatsinblue.org/_mobile_app/homepage.xml',
+                dataType: 'xml',
+                success: function (myxml) {
+                    $(myxml).find('item').each(function () {
+                        i += 1;
+                        $(this).find("title").each(function () {
+                            var title = '<div class="main_link" id="feed' + i + '"><a href="content.html?ID=' + i + '&Feed=Home" data-role="button"  id="' + i + '">' + $(this).text() + '</a></div>';
+                            $('#feedMain > ul').append(title);
+                        });
+                    });
+                }
+            });
+        });
+        </script>
 </head>
 <body>
-    <div data-role="page" id="page1">
-        <div id="containter">
-            <a href="main.html" data-transition="slidefade">
-                <img src="_resources/img/splash.jpg" class="splash_image" /></a>
+    <div data-role="page" id="page2">
+        <header>
+            <ul class="header_list">
+                <li class="icon_back"><a href="index.html" data-rel="back"><img src="icon_back_sm.gif" /></a></li>
+                <li class="wib_logo"><img src="wib_logo_sm.gif" /></li>
+                <!-- <li class="icon_email"><img src="icon_email_sm.gif" /></li> -->
+            </ul>
+        </header>
+        <div id="feedMain">
+            <ul>
+            </ul>
+        </div>
+        <div class="bottom_buttons">
+            <a href="categories.html" data-role="button" class="blue_button" data-inline="true"
+                data-transition="slidefade">Read Insights by Category</a> <a href="categories.html"
+                    data-role="button" class="blue_button" data-inline="true" data-transition="slidefade">
+                    Sign Up for Email Alerts</a>
         </div>
     </div>
 </body>
