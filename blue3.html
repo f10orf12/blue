@@ -45,7 +45,7 @@
         //Articles
         $('#articles').live('pageshow', '[data-role=page]', function () {
             $('#feed > ul').html("");
-            $('a').click(function (e) {
+            $(this).click(function (e) {
                 g_ID = $(e.target).jqmData("article");
                 g_Feed = $(e.target).jqmData("feed");
                 alert(g_Feed);
