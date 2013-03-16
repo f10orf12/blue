@@ -1,0 +1,23 @@
+﻿0 Splash
+===========================================
+
+1 Home
+� Scrolls up under anchored header
+===========================================
+
+2 Single post
+� Scrolls up under anchored header
+� WiB logo clicks to Screen 1
+� Transition when tapping logo: Same as above.
+===========================================
+
+
+
+
+
+
+5 List of post headlines in one category w/blurb (alt version)
+� Scrolls
+� Grabs last 15 posts from category XML feed (same as above)
+� Transition when drilling into single post: Page slides off screen to left, then Screen 2 loads. 
+� Transition when hitting left arrow or logo: Same as Screen 2 description.
