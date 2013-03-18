@@ -140,8 +140,10 @@ img.header {
 div.bottom_buttons {
     margin: 0px auto;
     padding-top: 5px;
+    padding-bottom: 0px;
     position: relative;
     width: 100%;
+    background-color: #fff;
 }
 
 a.blue_button {

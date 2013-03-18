@@ -2,13 +2,9 @@
 ===========================================
 
 1 Home
-� Scrolls up under anchored header
 ===========================================
 
 2 Single post
-� Scrolls up under anchored header
-� WiB logo clicks to Screen 1
-� Transition when tapping logo: Same as above.
 ===========================================
 
 
@@ -21,3 +17,104 @@
 � Grabs last 15 posts from category XML feed (same as above)
 � Transition when drilling into single post: Page slides off screen to left, then Screen 2 loads. 
 � Transition when hitting left arrow or logo: Same as Screen 2 description.
+
+
+        var myArticles () {
+        $('#back').show();
+            $('#refresh').hide();
+            $('#feed > ul').html("");
+            $(this).click(function (e) {
+                g_ID = $(e.target).jqmData("article");
+                g_Feed = $(e.target).jqmData("feed");
+                //alert("a" + g_Feed);
+                $('#story').hide();
+                $(this).off(e);
+            });
+            $('div > a').click(function (e) {
+                g_ID = $(e.target).jqmData("article");
+                g_Feed = $(e.target).jqmData("feed");
+                $('#story').hide();
+                $(this).off(e);
+            });
+            var paramFeed = g_Feed;
+            if (paramFeed === "Home") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/homepage.xml';
+            }
+            if (paramFeed === "Africa") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_africa.xml';
+                $('#top_title').text("Africa");
+            }
+            if (paramFeed === "Americas") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_americas.xml';
+                $('#top_title').text("Americas");
+            }
+            if (paramFeed === "Arms") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_arms_control_disarmament.xml';
+                $('#top_title').text(" Arms Control and Disarmament");
+            }
+            if (paramFeed === "Asia") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_asia.xml';
+                $('#top_title').text("Asia");
+            }
+            if (paramFeed === "Children") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_children_armed_conflict.xml';
+                $('#top_title').text("Children and Armed Conflict");
+            }
+            if (paramFeed === "CounterTerrorism") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_counter_terrorism.xml';
+                $('#top_title').text("Counter-Terrorism");
+            }
+            if (paramFeed === "Europe") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_europe.xml';
+                $('#top_title').text("Europe");
+            }
+            if (paramFeed === "Justice") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_justice_criminal_accountability.xml';
+                $('#top_title').text("Justice and Criminal Accountability");
+            }
+            if (paramFeed === "MidEast") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_middle_east.xml';
+                $('#top_title').text("Middle East");
+            }
+            if (paramFeed === "PeaceBuilding") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_peacebuilding.xml';
+                $('#top_title').text("Peacebuilding");
+            }
+            if (paramFeed === "PeaceKeeping") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_peacekeeping.xml';
+                $('#top_title').text("Peacekeeping");
+            }
+            if (paramFeed === "PeaceMaking") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_peacemaking.xml';
+                $('#top_title').text("Peacemaking");
+            }
+            if (paramFeed === "Civilians") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_protection_civilians.xml';
+                $('#top_title').text("Protection of Civilians");
+            }
+            if (paramFeed === "Issues") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_un_institutional_issues.xml';
+                $('#top_title').text("UN Institutional Issues");
+            }
+            if (paramFeed === "Women") {
+                var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_women_peace_security.xml';
+                $('#top_title').text("Women, Peace and Security");
+            }
+            var title = '';
+            var i = 0;
+            $.ajax({
+                url: myUrl,
+                dataType: 'xml',
+                success: function (myxml) {
+                    $(myxml).find('item').each(function () {
+                        i += 1;
+                        $(this).find("title").each(function () {
+                            title += '<div class="title_link" id="feed' + i + '"><a href="#content" data-role="button" data-article =' + i + ' data-feed="' + paramFeed + '" class="title_link" id="' + i + '">' + $(this).text() + '</a></div>';
+                        });
+                    });
+                    $('#feed > ul').append(title);
+                }
+            });
+        }
+		});
+		}

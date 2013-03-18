@@ -23,7 +23,21 @@
             $(this).click(function (e) {
                 g_ID = $(e.target).jqmData("article");
                 g_Feed = $(e.target).jqmData("feed");
+                alert("a: " + g_Feed);
+                //$(this).off(e);
+                if (g_Feed === undefined) {
+                    alert("children: " + $(e.target).children().jqmData("feed") + $(e.target).children().jqmData("article"));
+                    g_ID = $(e.target).children().jqmData("article");
+                    g_Feed = $(e.target).children().jqmData("feed");
+                    window.location.hash = '#content';
+                }
+                else {
+                    alert("a: " + $(e.target).jqmData("feed") + $(e.target).jqmData("article"));
+                    g_Feed = $(e.target).jqmData("feed");
+                    g_ID = $(e.target).jqmData("article");
+                }
             });
+
             for (x; x < 2; x++) {
                 $('.main_link').remove();
                 var i = 0;
@@ -75,13 +89,20 @@
             $(this).click(function (e) {
                 g_ID = $(e.target).jqmData("article");
                 g_Feed = $(e.target).jqmData("feed");
-                //alert("a" + g_Feed);
-                $(this).off(e);
-            });
-            $('div > a').click(function (e) {
-                g_ID = $(e.target).jqmData("article");
-                g_Feed = $(e.target).jqmData("feed");
-                $(this).off(e);
+                alert("a: " + g_Feed);
+                //$(this).off(e);
+                if ((g_Feed === undefined && $(e.target.id) != "btn_Categories") || (g_Feed === undefined && $(e.target.hasClass) != "icon_back")) {
+                    e.preventDefault();
+                    alert("children: " + $(e.target).children().jqmData("feed") + $(e.target).children().jqmData("article"));
+                    g_ID = $(e.target).children().jqmData("article");
+                    g_Feed = $(e.target).children().jqmData("feed");
+                    window.location.hash = '#content';
+                }
+                else {
+                    alert("a: " + $(e.target).jqmData("feed") + $(e.target).jqmData("article"));
+                    g_Feed = $(e.target).jqmData("feed");
+                    g_ID = $(e.target).jqmData("article");
+                }
             });
             var paramFeed = g_Feed;
             if (paramFeed === "Home") {
@@ -260,7 +281,7 @@
             </ul>
         </div>
         <div class="bottom_buttons">
-            <a href="#categories" data-role="button" class="blue_button" data-inline="true" data-transition="slidefade">
+            <a href="#categories" id="btn_Categories" data-role="button" data-article="c" data-feed="c" class="blue_button" data-inline="true" data-transition="slidefade">
                 Read Insights by Category</a> <a href="#categories" data-role="button" class="blue_button"
                     data-inline="true" data-transition="slidefade">Sign Up for Email alerts</a>
         </div>
