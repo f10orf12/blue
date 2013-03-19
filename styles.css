@@ -81,6 +81,18 @@ div.category_link a {
     line-height: .8em;
 }
 
+div.category_link {
+    font-family: arial, sans-serif;
+    font-weight: bold;
+    color: #525252;
+    font-size: 1.05em;        
+    color: #525252;
+    text-decoration: none;        
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: .8em;
+}
+
 div.main_link {    
     border-bottom: 1px solid #525252;
     padding-left: 12px;
@@ -139,11 +151,10 @@ img.header {
 
 div.bottom_buttons {
     margin: 0px auto;
-    padding-top: 5px;
-    padding-bottom: 0px;
+    margin-top: 4px;
+    padding-bottom: 10px;
     position: relative;
     width: 100%;
-    background-color: #fff;
 }
 
 a.blue_button {
@@ -156,8 +167,7 @@ a.blue_button {
     text-align: center;
     color: #fff;
     margin: 0px auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 2px;
 }
 
 div.date {
@@ -185,6 +195,15 @@ div.content {
     text-align: left;
 }
 
+div.content p {
+    margin-bottom: 1em;
+}
+
 div#story {
     padding: 10px;
+}
+
+div.footer {
+    padding: 5px;
+    background-color: #fff;
 }
