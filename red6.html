@@ -37,14 +37,12 @@
                 $('#category_title').hide();
                 $('#refresh').show();
                 $('.category_link').remove();
+                $('.sub_category_link').remove();
                 $('.story_title').remove();
                 $('.pubDate').remove();
                 $('.content').remove();
                 $('#error').remove();
 
-                $('#refresh').live('click', function (event) {
-                    feedMe();
-                });
                 for (x; x < 2; x++) {
                     $('.main_link').remove();
                     var i = 0;
@@ -107,6 +105,11 @@
             }
 
             //buttons
+            $('#refresh').live('click', function (event) {
+                $('.main_link').remove();
+                myMain();
+            });
+
             $('[id^=main]').click(function (e) {
                 e.preventDefault();
                 g_ID = $(e.target).jqmData("article");
@@ -161,6 +164,7 @@
                     myCategories();
                 }
                 else if (page === "artContent") {
+                    $('#articles').prepend('<div id="top_title" class="top_title"></div>');
                     myArticles(g_Feed);
                 }
                 else {
@@ -306,7 +310,7 @@
             var myContent = function (id, feed) {
                 $('.main_link').remove();
                 $('.title_link').remove();
-                $('#top_title').html('');
+                $('#top_title').remove();
                 //page = "Content";
                 $('#back').show();
                 $('#refresh').hide();
