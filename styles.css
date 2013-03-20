@@ -24,29 +24,35 @@ a {
 
 div.header {
     padding: 0px;
-    height: 60px;
+    height: 59px;
     background: url('bg_small.gif') repeat-x;
 }
 
-div.header ul li {
+div.header ul {    
+    width: 100%;
+    text-align: center;
     padding-top: 12px;
-    display: inline-block;
+}
+
+div.header ul li {    
     margin: 0px;
 }
 
 div.header ul li.icon_back {
     text-align: left;
     padding-left: 10px;    
+    float: left;
 }
 
 div.header ul li.wib_logo {
     text-align: center;
-    width: 80%;
+    display: inline;
 }
 
 div.header ul li.icon_email {
     text-align: right;
-    padding-right: 4px;
+    padding-right: 10px;
+    float: right
 }
 
 
@@ -60,37 +66,78 @@ div.top_title {
     text-align: center;
     padding-left: 12px;
     padding-right: 12px;
-    padding-bottom: 6px;
+    padding-bottom: 12px;
+    padding-top: 6px;
+}
+#category_title {
+    font-family: georgia, serif;
+    font-weight: bold;
+    color: #525252;
+    font-size: 1.3em;
+    line-height: 1.2em;
+    text-align: center;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #525252;
 }
 
 div.category_link {    
-    border-bottom: 1px solid #525252;
+/*    border-bottom: 1px solid #525252;*/
     padding-left: 12px;
     padding-right: 12px;
+    background-color: #01bdeb;
 }
 
 div.category_link a {
     font-family: arial, sans-serif;
     font-weight: bold;
-    color: #525252;
+    color: #fff;
     font-size: 1.05em;        
-    color: #525252;
     text-decoration: none;        
-    padding-top: 10px;
-    padding-bottom: 10px;
-    line-height: .8em;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 1.1em;
 }
 
 div.category_link {
     font-family: arial, sans-serif;
     font-weight: bold;
+    color: #fff;
+    font-size: 1.05em;        
+    text-decoration: none;        
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 1.1em;
+}
+
+
+div.sub_category_link {    
+    border-bottom: 1px solid #525252;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+div.sub_category_link a {
+    font-family: arial, sans-serif;
+    font-weight: bold;
     color: #525252;
     font-size: 1.05em;        
-    color: #525252;
     text-decoration: none;        
-    padding-top: 10px;
-    padding-bottom: 10px;
-    line-height: .8em;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 1.1em;
+}
+
+div.sub_category_link {
+    font-family: arial, sans-serif;
+    font-weight: bold;
+    color: #525252;
+    font-size: 1.05em;        
+    text-decoration: none;        
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 1.1em;
 }
 
 div.main_link {    
@@ -150,27 +197,31 @@ img.header {
 }
 
 div.bottom_buttons {
-    margin: 0px auto;
-    margin-top: 4px;
-    padding-bottom: 10px;
+    margin: 0px auto;    
     position: relative;
     width: 100%;
 }
 
 a.blue_button {
     background-color: #01bdeb;
-    width: 70%;
-    padding: 2px;
+    width: 20em;
+    height: 1.4em;
+    padding: 5px;
     font-family: arial, sans-serif;
     font-weight: bold;    
-    font-size: 1.05em;
+    font-size: .90em;
     text-align: center;
     color: #fff;
     margin: 0px auto;
-    margin-top: 2px;
+    margin-bottom:14px;
 }
 
-div.date {
+a#btn_categories {
+    margin-bottom: 12px;
+}
+
+
+div.pubDate {
     font-family: arial, san-serif;
     font-weight: normal;
     color: #525252;
@@ -185,18 +236,23 @@ div.story_title {
     font-size: 1.4em;
     line-height: 1.2em;
     text-align: left;
-    padding-bottom: 12px;
+    padding-bottom: 14px;
 }
 
 div.content {
     font-family: georgia, serif;
     color: #525252;
     font-size: 1em;
+    line-height: 1.4em;
     text-align: left;
 }
 
 div.content p {
     margin-bottom: 1em;
+}
+
+div.content p a {
+    color: #e20000;
 }
 
 div#story {
