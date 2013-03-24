@@ -78,26 +78,24 @@
                 $('#story_pubDate').html("");
                 $('#story_content').html("");
                 z = 1;
-                var sections = '';
+                var objTitle = '';
+                var objLink = '';
                 for (z; z < 2; z++) {
                     var c = 0;
                     $.ajax({
-                        url: 'http://whatsinblue.org/_mobile_app/category_list_sub_items.xml',
+                        url: 'http://www.whatsinblue.org/_mobile_app/category_list.xml',
                         dataType: 'xml',
                         success: function (myxml) {
                             $(myxml).find('item').each(function () {
                                 c += 1;
                                 $(this).find('title').each(function () {
-                                    sections += '<div class="category_link" id="category' + c + '"><a href="#" data-role="button" class="article_link"  id="category' + c + '" data-feed="' + $(this).text() + '">' + $(this).text() + '</a></div>';
+                                    objTitle = $(this).text();
                                 });
-                                $(this).find('sub').each(function () {
-                                    $(this).find('subtitle').each(function () {
-                                        sections += '<div class="sub_category_link" id="subcategory' + c + '"><a href="#" data-role="button" class="article_link"  id="category' + c + '" data-feed="' + $(this).text() + '">' + $(this).text() + '</a></div>';
-                                    });
-
+                                $(this).find('link').each(function () {
+                                    objLink = $(this).text();
                                 });
+                                alert("title: " + objTitle + " link: " + objLink);
                             });
-                            jQuery('#sections > ul').append(sections);
                         }
                     });
                 }
@@ -213,131 +211,34 @@
                 var paramFeed = feed;
                 if (paramFeed === "Home") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/homepage.xml';
-                    $('#top_title').html(paramFeed);
                 }
                 if (paramFeed === "Africa") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_africa.xml';
-                    $('#top_title').html(paramFeed);
+                    $('#top_title').html("Africa").show();
                 }
                 if (paramFeed === "Burundi") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/burundi.xml';
-                    $('#top_title').html(paramFeed);
+                    $('#top_title').html("Burundi").show();
                 }
                 if (paramFeed === "Central African Republic") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/central_african_republic.xml';
-                    $('#top_title').html(paramFeed);
+                    $('#top_title').html("Central African Republic").show();
                 }
                 if (paramFeed === "Chad/CAR") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/chad_car.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Côte d'Ivoire") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/cote_divoire.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Democratic Republic of the Congo") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/democratic_republic_of_the_congo.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Eritrea") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/eritrea.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Ethiopia/Eritrea") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/ethiopia_eritrea.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Great Lakes Region") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/great_lakes_region.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Guinea") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/guinea.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Guinea-Bissau") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/guinea_bissau.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Kenya") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/kenya.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Liberia") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/liberia.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Libya") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/libya.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "LRA-affected areas") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/lra_affected_areas.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Mali/Sahel") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/mali_sahel.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Sierra Leone") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/sierra_leone.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Somalia") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/somalia.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Sudan/Darfur") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/sudan_darfur.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Sudan/South Sudan") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/sudan_south_sudan.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "UNOCA (Central Africa)") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/unoca_central_africa.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "UNOWA (West Africa)") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/unowa_west_africa.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Western Sahara") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/western_sahara.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Zimbabwe") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/zimbabwe.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "General Issues relating to Africa") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/general_issues_relating_to_africa.xml';
-                    $('#top_title').html(paramFeed);
+                    $('#top_title').html("Chad/CAR").show();
                 }
                 if (paramFeed === "Americas") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_americas.xml';
                     $('#top_title').html("Americas");
                 }
-                if (paramFeed === "Haiti") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/haiti.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Honduras") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/honduras.xml';
-                    $('#top_title').html(paramFeed);
-                }
                 if (paramFeed === "Arms Control and Disarmament") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_arms_control_disarmament.xml';
-                    $('#top_title').html(paramFeed);
+                    $('#top_title').html(" Arms Control and Disarmament");
                 }
                 if (paramFeed === "Asia") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_asia.xml';
-                    $('#top_title').html(paramFeed);
-                }
-                if (paramFeed === "Afghanistan") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/afghanistan.xml';
-                    $('#top_title').html(paramFeed);
+                    $('#top_title').html("Asia");
                 }
                 if (paramFeed === "Children and Armed Conflict") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_children_armed_conflict.xml';
@@ -428,9 +329,6 @@
                 }
                 if (paramFeed === "Chad/CAR") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/chad_car.xml';
-                }
-                if (paramFeed === "Côte d'Ivoire") {
-                    var myUrl = 'http://www.whatsinblue.org/_mobile_app/cote_divoire.xml';
                 }
                 if (paramFeed === "Americas") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_americas.xml';
