@@ -66,6 +66,7 @@
             //Categories
             var myCategories = function () {
                 page = "Categories";
+                $('#loading').show();
                 $('title_link').remove();
                 $('#category_title').html("Insights by Category").fadeIn();
                 $('#back').show();
@@ -97,6 +98,7 @@
 
                                 });
                             });
+                            $('#loading').hide();
                             jQuery('#sections > ul').append(sections);
                         }
                     });
@@ -185,6 +187,7 @@
                 $('#category_title').hide();
                 myCategories();
             });
+
             //share function
             $('#share').click(function () {
                 window.plugins.share.show({
@@ -532,6 +535,8 @@
                     <ul>
                     </ul>
                 </div>
+                <div id="loading">
+                    <img src="ajax-loader.png" /></div>
             </div>
             <div id="categories">
                 <div id="category_title" class="top_title">
