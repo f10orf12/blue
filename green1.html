@@ -32,6 +32,7 @@
             var myMain = function () {
                 page = "Main";
                 x = 1;
+                //$('#feedMain').hide();
                 $('#footer').html('<div class="bottom_buttons" id="btn_bottom"><a href="#categories" id="btn_categories" data-role="button" class="blue_button" data-inline="true" data-transition="slidefade">Read Insights by Category</a></div><div id="btn_email" class="bottom_buttons"><a href="http://m.securitycouncilreport.org/466706&t=kc3ie949lp8d0phh55jqih1f63" data-role="button" class="blue_button" data-inline="true" data-transition="slidefade">Sign Up for Email alerts</a></div>');
                 $('#btn_bottom').trigger('create');
                 $('#btn_email').trigger('create');
@@ -57,11 +58,13 @@
                                 $(this).find('title').each(function () {
                                     var title = '<div class="main_link" id="feed' + i + '"><a href="#content" class="article_link" data-role="button" data-article =' + i + ' data-feed="Home" data-transition="slidefade" id="main' + i + '">' + $(this).text() + '</a></div>';
                                     jQuery('#feedMain > ul').append(title);
+                                    $('#feedMain').fadeIn('slow');
                                 });
                             });
                         }
                     });
                 }
+
             }
             myMain();
 
@@ -76,9 +79,9 @@
                 $('.main_link').remove();
                 $('#error').remove();
                 $('#top_title').html('');
-                $('#story_title').html("");
-                $('#story_pubDate').html("");
-                $('#story_content').html("");
+                $('#story_title').html('');
+                $('#story_pubDate').html('');
+                $('#story_content').html('');
                 z = 1;
                 var sections = '';
                 for (z; z < 2; z++) {
@@ -100,6 +103,7 @@
                                 });
                             });
                             jQuery('#sections > ul').append(sections);
+                            $('#sections').fadeIn('slow');
                         }
                     });
                 }
@@ -109,6 +113,7 @@
             //buttons
             $('#refresh').live('click', function (event) {
                 $('.main_link').remove();
+                $('#feedMain').hide();
                 myMain();
             });
 
@@ -161,15 +166,19 @@
 
             $('#back').click(function (e) {
                 if (page === "Articles") {
+                    $('#top_title').remove();
                     $('.title_link').remove();
                     $('#categories').prepend('<div id="category_title" class="top_title"></div>');
+                    $('#sections').hide();
                     myCategories();
                 }
                 else if (page === "artContent") {
-                    $('#articles').prepend('<div id="top_title" class="top_title"></div>');
+                    $('#top_title').remove();
+                    $('#feed').hide();
                     myArticles(g_Feed);
                 }
                 else {
+                    $('#feedMain').hide();
                     $('#footer').html('<div class="bottom_buttons"><a href="#categories" id="btn_categories" data-role="button" class="blue_button" data-inline="true" data-transition="slidefade">Read Insights by Category</a></div><div class="bottom_buttons"><a href="http://www.whatsinblue.org/email_signup.php" target="_blank" data-role="button" class="blue_button" data-inline="true" data-transition="slidefade">Sign Up for Email alerts</a></div>');
                     myMain();
                 }
@@ -212,6 +221,7 @@
                 $('#story_content').html('');
                 $('#error').remove();
                 $('#feed > ul').html('');
+                $('#articles').prepend('<div id="top_title" class="top_title"></div>');
                 var paramFeed = feed;
                 if (paramFeed === "Home") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/homepage.xml';
@@ -392,8 +402,6 @@
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/kosovo.xml';
                     $('#top_title').html(paramFeed);
                 }
-
-
                 if (paramFeed === "Middle East") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/insights_middle_east.xml';
                     $('#top_title').html(paramFeed);
@@ -426,8 +434,6 @@
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/yemen.xml';
                     $('#top_title').html(paramFeed);
                 }
-
-
                 if (paramFeed === "Themes") {
                     var myUrl = 'http://www.whatsinblue.org/_mobile_app/themes.xml';
                     $('#top_title').html(paramFeed);
@@ -489,6 +495,7 @@
                     error: function (error) { $('#feed > ul').append('<div id="error">Error Loading Content</div>'); }
                 });
                 $('#category_title').fadeIn();
+                $('#top_title').fadeIn();
                 $('#feed').fadeIn('slow');
             }
 
@@ -749,23 +756,23 @@
         </div>
         <div id="red" data-role="content">
             <div id="main">
-                <div id="feedMain">
+                <div id="feedMain" style="display: none;">
                     <ul>
                     </ul>
                 </div>
             </div>
             <div id="categories">
-                <div id="category_title" class="top_title">
+                <div id="category_title" class="top_title" style="display: none;">
                 </div>
-                <div id="sections">
+                <div id="sections" style="display: none;">
                     <ul>
                     </ul>
                 </div>
             </div>
             <div id="articles">
-                <div id="top_title" class="top_title">
+                <div id="top_title" class="top_title" style="display: none;">
                 </div>
-                <div id="feed">
+                <div id="feed" style="display: none;">
                     <ul>
                     </ul>
                 </div>
