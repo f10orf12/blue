@@ -39,6 +39,7 @@
                 $('#back').hide();
                 $('#category_title').hide();
                 $('#refresh').show();
+                $('#top_title').remove();
                 $('.category_link').remove();
                 $('.sub_category_link').remove();
                 $('.story_title').remove();
@@ -64,7 +65,6 @@
                         }
                     });
                 }
-
             }
             myMain();
 
@@ -73,6 +73,8 @@
                 page = "Categories";
                 $('title_link').remove();
                 $('#category_title').html("Insights by Category").fadeIn();
+                $('.category_link').remove();
+                $('.sub_category_link').remove();
                 $('#back').show();
                 $('.bottom_buttons').remove();
                 $('#refresh').hide();
@@ -103,7 +105,7 @@
                                 });
                             });
                             jQuery('#sections > ul').append(sections);
-                            $('#sections').fadeIn('slow');
+                            $('#sections').fadeIn();
                         }
                     });
                 }
@@ -198,6 +200,7 @@
             });
             //share function
             $('#share').click(function () {
+                alert("email me");
                 window.plugins.share.show({
                     subject: shareTitle,
                     text: shareLink
@@ -207,11 +210,19 @@
                     );
             });
 
+            $('#story a').live('click', function (e) {
+                e.preventDefault();
+                alert("childbrowser clicked!");
+                window.plugins.childBrowser.showWebPage($(this).attr('href'), { showLocationBar: true });
+            });
+
+
             //Articles
             var myArticles = function (feed) {
                 page = "Articles";
                 $('#refresh').hide();
                 $('#back').show();
+                $('.title_link').remove();
                 $('.bottom_buttons').remove();
                 $('#category_title').remove();
                 $('.category_link').remove();
@@ -220,7 +231,7 @@
                 $('#story_pubDate').html('');
                 $('#story_content').html('');
                 $('#error').remove();
-                $('#feed > ul').html('');
+                $('#feed').hide();
                 $('#articles').prepend('<div id="top_title" class="top_title"></div>');
                 var paramFeed = feed;
                 if (paramFeed === "Home") {
@@ -501,6 +512,7 @@
 
             //Content
             var myContent = function (id, feed) {
+                $('#story').hide();
                 $('.main_link').remove();
                 $('.title_link').remove();
                 $('#top_title').remove();
@@ -751,7 +763,7 @@
                 <li id="back" class="icon_back"><a href="#" data-rel="back" data-transition="slidefade">back</a></li>
                 <li id="refresh" class="icon_refresh"><a href="#" data-transition="slidefade">refresh</a></li>
                 <li id="logo" class="wib_logo"><a href="#" data-transition="slidefade"><img src="wib_logo_sm.gif" /></a></li>
-                <li id="share" class="icon_email"><a href="#" data-transition="slidefade">email</a></li>
+                <li id="share" class="icon_email"><a href="#" data-transition="slidefade"><img src="wib_email_sm.gif" /></a></li>
             </ul>
         </div>
         <div id="red" data-role="content">
