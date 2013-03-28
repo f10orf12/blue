@@ -15,7 +15,7 @@
     <script type="text/javascript" src="share.js"></script>
     <script type="text/javascript" src="phonegap.js"></script>
     <script type="text/javascript" src="childbrowser.js"></script>
-    <script src="jquery.touchclick.js"></script>
+    <script type="text/javascript" src="jquery.touchclick.js"></script>
     <script type="text/javascript">
         //Global Variables
         g_params = '';
@@ -26,18 +26,17 @@
         shareTitle = '';
         shareLink = '';
         connState = '';
+        imgLoader = '<div id="loader"><img src="ajax-loader.gif" /></div>';
 
         document.addEventListener("deviceready", onDeviceReady, false);
 
         function onDeviceReady() {
             checkConnection();
             navigator.splashscreen.hide();
-
         }
 
         function checkConnection() {
             var networkState = navigator.network.connection.type;
-
             var states = {};
             states[Connection.UNKNOWN] = 0;
             states[Connection.ETHERNET] = 1;
@@ -46,19 +45,17 @@
             states[Connection.CELL_3G] = 1;
             states[Connection.CELL_4G] = 1;
             states[Connection.NONE] = 0;
-
             connState = states[networkState];
         }
         $('#index').live('pageinit', '[data-role=page]', function () {
 
         });
-
         $('#index').live('pageshow', '[data-role=page]', function () {
             //Main
             var myMain = function () {
                 page = "Main";
                 x = 1;
-                $('#footer').html('<div class="bottom_buttons" id="btn_bottom"><a href="#" id="btn_categories" data-role="button" class="blue_button" data-inline="true" data-transition="slidefade">Read Insights by Category</a></div><div id="btn_email" class="bottom_buttons"><a href="#" data-role="button" class="blue_button" data-inline="true" data-transition="slidefade">Sign Up for Email alerts</a></div>');
+                $('#footer').html('<div class="bottom_buttons" id="btn_bottom"><a href="#" id="btn_categories" data-role="button" class="blue_button">Read Insights by Category</a></div><div id="btn_email" class="bottom_buttons"><a href="#" data-role="button" class="blue_button">Sign Up for Email alerts</a></div>');
                 $('#top_title').remove();
                 $('#btn_bottom').trigger('create');
                 $('#btn_email').trigger('create');
@@ -71,7 +68,6 @@
                 $('.pubDate').remove();
                 $('.content').remove();
                 $('#error').remove();
-
                 for (x; x < 2; x++) {
                     $('.main_link').remove();
                     var i = 0;
@@ -84,6 +80,7 @@
                                 $(this).find('title').each(function () {
                                     var title = '<div class="main_link" id="feed' + i + '"><a href="#content" class="article_link" data-role="button" data-article =' + i + ' data-feed="Home" data-transition="slidefade" id="main' + i + '">' + $(this).text() + '</a></div>';
                                     jQuery('#feedMain > ul').append(title);
+                                    $('#loader').remove();
                                     $('#feedMain').fadeIn(400);
                                 });
                             });
@@ -91,10 +88,18 @@
                     });
                 }
             }
-            myMain();
-
+            if (connState == 0) {
+                alert("You currently do not have an Internet connection.");
+                $('#back').hide();
+                $('#refresh').hide();
+            }
+            else {
+                jQuery('#red').append(imgLoader);
+                myMain();
+            }
             //Categories
             var myCategories = function () {
+                jQuery('#red').append(imgLoader);
                 page = "Categories";
                 $('title_link').remove();
                 $('#category_title').html("Insights by Category").fadeIn(400);
@@ -128,8 +133,10 @@
                                 });
                             });
                             jQuery('#sections > ul').append(sections);
+                            $('#loader').remove();
                             $('html, body').animate({ scrollTop: 0 }, 100);
                             $('#sections').fadeIn(600);
+
                         }
                     });
                 }
@@ -204,7 +211,7 @@
                 }
                 else {
                     $('#feedMain').hide();
-                    $('#footer').html('<div class="bottom_buttons"><a href="#" id="btn_categories" data-role="button" class="blue_button" data-inline="true" data-transition="slidefade">Read Insights by Category</a></div><div class="bottom_buttons"><a href="http://www.whatsinblue.org/email_signup.php" target="_blank" data-role="button" class="blue_button" data-inline="true" data-transition="slidefade">Sign Up for Email alerts</a></div>');
+                    $('#footer').html('<div class="bottom_buttons"><a href="#" id="btn_categories" data-role="button" class="blue_button">Read Insights by Category</a></div><div class="bottom_buttons"><a href="http://www.whatsinblue.org/email_signup.php" target="_blank" data-role="button" class="blue_button">Sign Up for Email alerts</a></div>');
                     myMain();
                 }
             });
@@ -254,6 +261,7 @@
 
             //Articles
             var myArticles = function (feed) {
+                jQuery('#red').append(imgLoader);
                 page = "Articles";
                 $('#refresh').hide();
                 $('#back').show();
@@ -540,20 +548,21 @@
                     },
                     error: function (error) { $('#feed > ul').append('<div id="error">Error Loading Content</div>'); }
                 });
+                $('#loader').remove();
                 $('html, body').animate({ scrollTop: 0 }, 100);
-                $('#category_title').fadeIn(400);
-                $('#top_title').fadeIn(400);
-                $('#feed').fadeIn(400);
-                
+                $('#category_title').fadeIn(600);
+                $('#top_title').fadeIn(600);
+                $('#feed').fadeIn(600);
+
             }
 
             //Content
             var myContent = function (id, feed) {
+                jQuery('#red').append(imgLoader);
                 $('#story').hide();
                 $('.main_link').remove();
                 $('.title_link').remove();
                 $('#top_title').remove();
-                //page = "Content";
                 $('#back').show();
                 $('#refresh').hide();
                 $('.bottom_buttons').remove();
@@ -783,8 +792,9 @@
                                 $(this).find("link").each(function () {
                                     shareLink = $(this).text();
                                 });
-                                $('html, body').animate({ scrollTop: 0 }, 'fast');
-                                $('#story').fadeIn(400);
+                                $('#loader').remove();
+                                $('html, body').animate({ scrollTop: 0 }, 100);
+                                $('#story').fadeIn(600);
                             }
                         });
                     },
