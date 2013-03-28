@@ -3,12 +3,18 @@
 ===========================================
 
 1 Home
+-offline browsing - see green2
 ===========================================
 
-2 Single post
+2 Categories
+-implement dynamic list of categories from xml based on array of objects
 ===========================================
 
+3 Articles
+-implement dynamic list of xml files based on array of objects
+===========================================
 
-
-
+4 Cotent
+-implement dynamic list of xml files based on array of objects
+===========================================
 
